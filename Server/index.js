@@ -17,10 +17,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 4000;
 const MONGO = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/eventmgmt';
 
 mongoose.connect(MONGO)
-  .then(() => console.log('Connected to MongoDB'))
+  .then(() =>{ 
+    app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+
+    console.log('Connected to MongoDB')})
   .catch(err => console.error('Mongo connection error', err));
 
 app.get('/api/health', (req, res) => res.json({ ok: true, time: new Date().toISOString() }));
@@ -28,5 +32,3 @@ app.get('/api/health', (req, res) => res.json({ ok: true, time: new Date().toISO
 app.use('/api/profiles', profilesRouter);
 app.use('/api/events', eventsRouter);
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

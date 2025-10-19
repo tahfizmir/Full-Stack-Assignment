@@ -18,6 +18,7 @@ router.post('/', async (req, res) => {
 // List profiles
 router.get('/', async (req, res) => {
   const profiles = await Profile.find().sort({ createdAt: -1 });
+  console.log(profiles);
   res.json(profiles);
 });
 

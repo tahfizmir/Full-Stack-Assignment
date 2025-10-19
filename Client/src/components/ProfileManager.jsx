@@ -4,7 +4,7 @@ import { fetchProfiles, createProfile } from '../store/profilesSlice.js';
 
 export default function ProfileManager({ onSelect }) {
   const dispatch = useDispatch();
-  const profiles = useSelector(s => s.profiles.items);
+  const profiles = useSelector(s => s.profiles.items) || [];
   const [name, setName] = useState('');
   const [tz, setTz] = useState('UTC');
 
@@ -17,7 +17,8 @@ export default function ProfileManager({ onSelect }) {
   };
 
   return (
-    <div style={{ border: '1px solid #ddd', padding: 12, marginBottom: 12 }}>
+    <>
+      <div style={{ border: '1px solid #ddd', padding: 12, marginBottom: 12 }}>
       <h3>Profiles</h3>
       <div>
         <input placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
@@ -32,6 +33,7 @@ export default function ProfileManager({ onSelect }) {
       </div>
 
       <ul>
+        {profiles.length === 0 && <li>No profiles yet</li>}
         {profiles.map(p => (
           <li key={p._id}>
             <button onClick={() => onSelect(p)}>{p.name} ({p.timezone})</button>
@@ -39,5 +41,6 @@ export default function ProfileManager({ onSelect }) {
         ))}
       </ul>
     </div>
+    </>
   );
 }

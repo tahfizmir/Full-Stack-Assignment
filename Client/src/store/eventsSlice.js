@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API = '/api';
+const API = 'http://localhost:4000/';
 
 export const fetchEventsForProfile = createAsyncThunk('events/fetchForProfile', async (profileId) => {
-  const res = await axios.get(`${API}/events/byProfile/${profileId}`);
+  const res = await axios.get(API+ `events/byProfile/${profileId}`);
   return res.data;
 });
 
 export const createEvent = createAsyncThunk('events/create', async (payload) => {
-  const res = await axios.post(API + '/events', payload);
+  const res = await axios.post(API + 'events', payload);
   return res.data;
 });
 
 export const updateEvent = createAsyncThunk('events/update', async ({ id, update }) => {
-  const res = await axios.put(`${API}/events/${id}`, update);
+  const res = await axios.put(`${API}events/${id}`, update);
   return res.data;
 });
 

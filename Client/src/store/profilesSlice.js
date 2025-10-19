@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API = '/api';
+const BASE_URL='http://localhost:4000/'
 
 export const fetchProfiles = createAsyncThunk('profiles/fetch', async () => {
-  const res = await axios.get(API + '/profiles');
+  const res = await axios.get(BASE_URL + 'api/profiles');
   return res.data;
 });
 
 export const createProfile = createAsyncThunk('profiles/create', async (payload) => {
-  const res = await axios.post(API + '/profiles', payload);
+  const res = await axios.post(BASE_URL + '/profiles', payload);
   return res.data;
 });
 
