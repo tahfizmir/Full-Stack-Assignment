@@ -1,0 +1,13 @@
+{
+  "name": "full-stack-assignment",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start:client": "cd Client; npm run dev",
+    "start:server": "cd Server; node index.js",
+    "dev": "concurrently \"npm: start:server\" \"npm: start:client\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
